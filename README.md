@@ -52,7 +52,7 @@ Built with **Flutter (Dart 3)** and backed by an encrypted **SQLCipher** databas
 
 ---
 
-##Thanks for the PROJECT
+## Thanks for the PROJECT
 Note-taking
 https://github.com/SaadhJawwadh/Note-taking
 
