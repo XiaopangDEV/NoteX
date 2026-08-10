@@ -1,10 +1,8 @@
-# Everything App 📝
+# NoteX App 📝
 
-[![Get it on Google Play](https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png)](https://play.google.com/store/apps/details?id=com.saadhjawwadh.notebook)
+NoteX App is a fully offline, private, and secure workspace designed to manage your thoughts, track your finances, and monitor your health without sending a single byte of data to external servers.
 
-Everything App is a fully offline, private, and secure workspace designed to manage your thoughts, track your finances, and monitor your health without sending a single byte of data to external servers.
-
-Built with **Flutter (Dart 3)** and backed by an encrypted **SQLCipher** database, Everything App combines security, modern aesthetics, and smart features into a single workspace.
+Built with **Flutter (Dart 3)** and backed by an encrypted **SQLCipher** database, NoteX App combines security, modern aesthetics, and smart features into a single workspace.
 
 ---
 
@@ -46,20 +44,17 @@ Built with **Flutter (Dart 3)** and backed by an encrypted **SQLCipher** databas
 ---
 
 ## 📥 How to Download & Install
-
-Everything App can be installed directly from the Google Play Store or manually via GitHub Releases.
-
-### 1. Google Play Store (Recommended)
-
-[![Get it on Google Play](https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png)](https://play.google.com/store/apps/details?id=com.saadhjawwadh.notebook)
-
-### 2. Manual Installation (GitHub Releases)
-
-1. Navigate to the [GitHub Releases Page](https://github.com/SaadhJawwadh/Note-taking/releases).
-2. Download the latest `.apk` file (e.g. `note-book-v1.34.0.apk`).
+1. Navigate to the [GitHub Releases Page](https://github.com/XiaopangDEV/NoteX/releases).
+2. Download the latest `.apk` file (e.g. `*.apk`).
 3. Open the downloaded file on your Android device.
 4. When prompted, allow your web browser or file manager permission to **"Install unknown apps"**.
 5. Follow the on-screen installer instructions to finish.
+
+---
+
+##Thanks for the PROJECT
+Note-taking
+https://github.com/SaadhJawwadh/Note-taking
 
 ---
 
@@ -74,8 +69,8 @@ Everything App can be installed directly from the Google Play Store or manually 
 
 1. **Clone the repository**:
    ```bash
-   git clone https://github.com/SaadhJawwadh/Note-taking.git
-   cd Note-taking
+   git clone https://github.com/XiaopangDEV/NoteX.git
+   cd NoteX
    ```
 
 2. **Get Dependencies**:
