@@ -1,4 +1,4 @@
-package com.saadhjawwadh.notebook
+package com.xiaopangdev.notex
 
 import android.app.PendingIntent
 import android.appwidget.AppWidgetManager
@@ -109,7 +109,7 @@ class FinanceWidgetProvider : AppWidgetProvider() {
     private fun setupIntents(context: Context, views: RemoteViews) {
         // Intent for clicking the "+" quick-add button
         val addIntent = Intent(context, MainActivity::class.java).apply {
-            action = "com.saadhjawwadh.notebook.ADD_TRANSACTION"
+            action = "com.xiaopangdev.notex.ADD_TRANSACTION"
             flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP
         }
         val addPendingIntent = PendingIntent.getActivity(
@@ -122,7 +122,7 @@ class FinanceWidgetProvider : AppWidgetProvider() {
 
         // Intent for clicking the widget body (opens MainActivity deep link to Budgets/Analytics)
         val mainIntent = Intent(context, MainActivity::class.java).apply {
-            action = "com.saadhjawwadh.notebook.VIEW_TRENDS"
+            action = "com.xiaopangdev.notex.VIEW_TRENDS"
             flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP
         }
         val mainPendingIntent = PendingIntent.getActivity(

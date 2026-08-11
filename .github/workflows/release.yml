@@ -131,7 +131,7 @@ jobs:
         uses: r0adkll/upload-google-play@v1
         with:
           serviceAccountJsonPlainText: ${{ secrets.PLAY_SERVICE_ACCOUNT_JSON }}
-          packageName: com.saadhjawwadh.notebook
+          packageName: com.xiaopangdev.notex
           releaseFiles: note-book-${{ github.ref_name }}.aab
           track: beta
           whatsNewDirectory: distribution/whatsnew

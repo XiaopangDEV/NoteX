@@ -34,7 +34,7 @@
     </queries>
 
     <application
-        android:label="Everything App"
+        android:label="NoteX"
         android:name="${applicationName}"
         android:enableOnBackInvokedCallback="true"
         android:allowBackup="true"
@@ -86,7 +86,7 @@
                 <data android:mimeType="image/*" />
             </intent-filter>
 
-            <!-- "Everything App" entry in the text-selection context menu -->
+            <!-- "NoteX" entry in the text-selection context menu -->
             <intent-filter>
                 <action android:name="android.intent.action.PROCESS_TEXT" />
                 <category android:name="android.intent.category.DEFAULT" />

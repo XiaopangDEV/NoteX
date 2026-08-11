@@ -1,4 +1,4 @@
-package com.saadhjawwadh.notebook
+package com.xiaopangdev.notex
 
 import io.flutter.embedding.android.FlutterFragmentActivity
 import io.flutter.embedding.engine.FlutterEngine
@@ -15,8 +15,8 @@ import android.appwidget.AppWidgetManager
 import android.content.ComponentName
 
 class MainActivity: FlutterFragmentActivity() {
-    private val CHANNEL = "com.saadhjawwadh.notebook/device_lock"
-    private val WIDGET_CHANNEL = "com.saadhjawwadh.notebook/widget"
+    private val CHANNEL = "com.xiaopangdev.notex/device_lock"
+    private val WIDGET_CHANNEL = "com.xiaopangdev.notex/widget"
     private var screenOffLock = false
     private var receiver: BroadcastReceiver? = null
     private var pendingWidgetAction: String? = null
@@ -46,11 +46,11 @@ class MainActivity: FlutterFragmentActivity() {
 
     private fun handleIntent(intent: Intent?) {
         when (intent?.action) {
-            "com.saadhjawwadh.notebook.ADD_TRANSACTION" -> pendingWidgetAction = "add_transaction"
-            "com.saadhjawwadh.notebook.VIEW_BUDGETS" -> pendingWidgetAction = "view_budgets"
-            "com.saadhjawwadh.notebook.VIEW_TRENDS" -> pendingWidgetAction = "view_trends"
-            "com.saadhjawwadh.notebook.NEW_NOTE" -> pendingWidgetAction = "new_note"
-            "com.saadhjawwadh.notebook.SEARCH" -> pendingWidgetAction = "search"
+            "com.xiaopangdev.notex.ADD_TRANSACTION" -> pendingWidgetAction = "add_transaction"
+            "com.xiaopangdev.notex.VIEW_BUDGETS" -> pendingWidgetAction = "view_budgets"
+            "com.xiaopangdev.notex.VIEW_TRENDS" -> pendingWidgetAction = "view_trends"
+            "com.xiaopangdev.notex.NEW_NOTE" -> pendingWidgetAction = "new_note"
+            "com.xiaopangdev.notex.SEARCH" -> pendingWidgetAction = "search"
             Intent.ACTION_PROCESS_TEXT -> {
                 val text = intent.getCharSequenceExtra(Intent.EXTRA_PROCESS_TEXT)?.toString()
                 if (!text.isNullOrEmpty()) {

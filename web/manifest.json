@@ -1,11 +1,11 @@
 {
-    "name": "note_taking_app",
-    "short_name": "note_taking_app",
+    "name": "NoteXApp",
+    "short_name": "notexapp",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#18181b",
     "theme_color": "#18181b",
-    "description": "A new Flutter project.",
+    "description": "A Note App project.",
     "orientation": "portrait-primary",
     "prefer_related_applications": false,
     "icons": [

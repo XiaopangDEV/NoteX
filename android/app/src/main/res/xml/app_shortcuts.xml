@@ -7,9 +7,9 @@
         android:shortcutShortLabel="@string/shortcut_new_note_short"
         android:shortcutLongLabel="@string/shortcut_new_note_long">
         <intent
-            android:action="com.saadhjawwadh.notebook.NEW_NOTE"
-            android:targetPackage="com.saadhjawwadh.notebook"
-            android:targetClass="com.saadhjawwadh.notebook.MainActivity" />
+            android:action="com.xiaopangdev.notex.NEW_NOTE"
+            android:targetPackage="com.xiaopangdev.notex"
+            android:targetClass="com.xiaopangdev.notex.MainActivity" />
     </shortcut>
     <shortcut
         android:shortcutId="new_transaction"
@@ -18,9 +18,9 @@
         android:shortcutShortLabel="@string/shortcut_new_transaction_short"
         android:shortcutLongLabel="@string/shortcut_new_transaction_long">
         <intent
-            android:action="com.saadhjawwadh.notebook.ADD_TRANSACTION"
-            android:targetPackage="com.saadhjawwadh.notebook"
-            android:targetClass="com.saadhjawwadh.notebook.MainActivity" />
+            android:action="com.xiaopangdev.notex.ADD_TRANSACTION"
+            android:targetPackage="com.xiaopangdev.notex"
+            android:targetClass="com.xiaopangdev.notex.MainActivity" />
     </shortcut>
     <shortcut
         android:shortcutId="search"
@@ -29,8 +29,8 @@
         android:shortcutShortLabel="@string/shortcut_search_short"
         android:shortcutLongLabel="@string/shortcut_search_long">
         <intent
-            android:action="com.saadhjawwadh.notebook.SEARCH"
-            android:targetPackage="com.saadhjawwadh.notebook"
-            android:targetClass="com.saadhjawwadh.notebook.MainActivity" />
+            android:action="com.xiaopangdev.notex.SEARCH"
+            android:targetPackage="com.xiaopangdev.notex"
+            android:targetClass="com.xiaopangdev.notex.MainActivity" />
     </shortcut>
 </shortcuts>

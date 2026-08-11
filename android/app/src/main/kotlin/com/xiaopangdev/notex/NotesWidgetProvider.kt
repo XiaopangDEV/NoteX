@@ -1,4 +1,4 @@
-package com.saadhjawwadh.notebook
+package com.xiaopangdev.notex
 
 import android.app.PendingIntent
 import android.appwidget.AppWidgetManager
@@ -19,11 +19,11 @@ class NotesWidgetProvider : AppWidgetProvider() {
 
             views.setOnClickPendingIntent(
                 R.id.notes_widget_new_note,
-                actionPendingIntent(context, "com.saadhjawwadh.notebook.NEW_NOTE", 10)
+                actionPendingIntent(context, "com.xiaopangdev.notex.NEW_NOTE", 10)
             )
             views.setOnClickPendingIntent(
                 R.id.notes_widget_search,
-                actionPendingIntent(context, "com.saadhjawwadh.notebook.SEARCH", 11)
+                actionPendingIntent(context, "com.xiaopangdev.notex.SEARCH", 11)
             )
 
             appWidgetManager.updateAppWidget(appWidgetId, views)

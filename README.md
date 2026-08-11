@@ -1,4 +1,4 @@
-# NoteX App 📝
+# NoteX App 📝（Powered by Claude Code）
 
 NoteX App is a fully offline, private, and secure workspace designed to manage your thoughts, track your finances, and monitor your health without sending a single byte of data to external servers.
 
