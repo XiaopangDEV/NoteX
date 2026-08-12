@@ -1,0 +1,137 @@
+name: Build and Release
+
+on:
+  push:
+    tags:
+      - "v*"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    name: Build & Release
+    runs-on: ubuntu-latest
+    env:
+      KEYSTORE_BASE64: ${{ secrets.KEYSTORE_BASE64 }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-java@v4
+        with:
+          distribution: "zulu"
+          java-version: "17"
+
+      - uses: subosito/flutter-action@v2
+        with:
+          flutter-version: "3.44.x"
+          channel: "stable"
+
+      # ── Derive version from tag ──────────────────────────────────────
+      - name: Extract version from tag
+        id: version
+        run: |
+          TAG="${GITHUB_REF_NAME:-v0.0.0}"
+          # Strip leading 'v' → 1.16.0
+          VERSION="${TAG#v}"
+          # Compute versionCode: major*10000 + minor*100 + patch
+          IFS='.' read -r MAJOR MINOR PATCH <<< "$VERSION"
+          CODE=$(( ${MAJOR:-0} * 10000 + ${MINOR:-0} * 100 + ${PATCH:-0} ))
+          echo "version=$VERSION" >> "$GITHUB_OUTPUT"
+          echo "code=$CODE" >> "$GITHUB_OUTPUT"
+          echo "Version: $VERSION  Code: $CODE"
+
+      - name: Update pubspec.yaml version
+        run: |
+          sed -i "s/^version: .*/version: ${{ steps.version.outputs.version }}+${{ steps.version.outputs.code }}/" pubspec.yaml
+          echo "Updated pubspec.yaml:"
+          head -5 pubspec.yaml
+
+      # ── Release signing (optional — falls back to debug if secrets missing) ─
+      - name: Setup release signing
+        if: env.KEYSTORE_BASE64 != ''
+        env:
+          KEY_ALIAS: ${{ secrets.KEY_ALIAS }}
+          KEY_PASSWORD: ${{ secrets.KEY_PASSWORD }}
+          STORE_PASSWORD: ${{ secrets.STORE_PASSWORD }}
+        run: |
+          echo "$KEYSTORE_BASE64" | base64 -d > android/app/upload-keystore.jks
+          cat > android/key.properties <<EOF
+          storePassword=$STORE_PASSWORD
+          keyPassword=$KEY_PASSWORD
+          keyAlias=$KEY_ALIAS
+          storeFile=upload-keystore.jks
+          EOF
+
+      # ── Build ────────────────────────────────────────────────────────
+      - name: Get Dependencies
+        run: flutter pub get
+
+      - name: Generate Splash
+        run: flutter pub run flutter_native_splash:create
+
+      - name: Analyze
+        run: flutter analyze
+
+      - name: Build APK
+        run: flutter build apk --release --no-tree-shake-icons
+
+      - name: Build App Bundle
+        run: flutter build appbundle --release --no-tree-shake-icons
+
+      - name: Rename Artifacts
+        run: |
+          cp build/app/outputs/flutter-apk/app-release.apk note-book-${{ github.ref_name }}.apk
+          cp build/app/outputs/bundle/release/app-release.aab note-book-${{ github.ref_name }}.aab
+
+      # ── Checksum ─────────────────────────────────────────────────────
+      - name: Generate SHA256 checksums
+        run: |
+          sha256sum note-book-${{ github.ref_name }}.apk > note-book-${{ github.ref_name }}.apk.sha256
+          sha256sum note-book-${{ github.ref_name }}.aab > note-book-${{ github.ref_name }}.aab.sha256
+
+      # ── GitHub Release ───────────────────────────────────────────────
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: |
+            note-book-${{ github.ref_name }}.apk
+            note-book-${{ github.ref_name }}.aab
+            note-book-${{ github.ref_name }}.apk.sha256
+            note-book-${{ github.ref_name }}.aab.sha256
+          body_path: ${{ hashFiles('RELEASE_NOTES.md') != '' && 'RELEASE_NOTES.md' || '' }}
+          generate_release_notes: true
+
+      # ── Prepare Play Store WhatsNew Multilingual Release Notes ──────
+      - name: Prepare Play Store Release Notes
+        run: |
+          mkdir -p distribution/whatsnew
+          if [ -f PLAY_STORE_NOTES.md ]; then
+            sed -n '/<en-US>/,/<\/en-US>/p' PLAY_STORE_NOTES.md | grep -v '<en-US>' | grep -v '</en-US>' > distribution/whatsnew/whatsnew-en-US
+            sed -n '/<ta-IN>/,/<\/ta-IN>/p' PLAY_STORE_NOTES.md | grep -v '<ta-IN>' | grep -v '</ta-IN>' > distribution/whatsnew/whatsnew-ta-IN
+            echo "Successfully generated Play Store release notes:"
+            echo "=== whatsnew-en-US ==="
+            cat distribution/whatsnew/whatsnew-en-US
+            echo "=== whatsnew-ta-IN ==="
+            cat distribution/whatsnew/whatsnew-ta-IN
+          elif [ -f RELEASE_NOTES.md ]; then
+            cp RELEASE_NOTES.md distribution/whatsnew/whatsnew-en-US
+          else
+            echo "• Bug fixes and performance improvements." > distribution/whatsnew/whatsnew-en-US
+          fi
+
+      # ── Upload to Google Play Store ──────────────────────────────────
+      - name: Publish to Google Play
+        env:
+          PLAY_SERVICE_ACCOUNT_JSON: ${{ secrets.PLAY_SERVICE_ACCOUNT_JSON }}
+        if: env.PLAY_SERVICE_ACCOUNT_JSON != ''
+        uses: r0adkll/upload-google-play@v1
+        with:
+          serviceAccountJsonPlainText: ${{ secrets.PLAY_SERVICE_ACCOUNT_JSON }}
+          packageName: com.xiaopangdev.notex
+          releaseFiles: note-book-${{ github.ref_name }}.aab
+          track: beta
+          whatsNewDirectory: distribution/whatsnew
