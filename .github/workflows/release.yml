@@ -18,23 +18,237 @@ jobs:
       KEYSTORE_BASE64: ${{ secrets.KEYSTORE_BASE64 }}
 
     steps:
-      # ────────────────────────────────────────────────────────────────
+
+      # ============================================================
       # Checkout
-      # ────────────────────────────────────────────────────────────────
+      # ============================================================
       - name: Checkout
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
 
-      # ────────────────────────────────────────────────────────────────
+
+      # ============================================================
       # Java
-      # ────────────────────────────────────────────────────────────────
+      # ============================================================
       - name: Setup Java
         uses: actions/setup-java@v4
         with:
-          distribution: "zulu"
+          distribution: zulu
           java-version: "17"
 
+
+      # ============================================================
+      # Flutter
+      # ============================================================
+      - name: Setup Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: "3.44.x"
+          channel: stable
+          cache: true
+
+
+      # ============================================================
+      # Read version from pubspec.yaml
+      #
+      # IMPORTANT:
+      # This ONLY reads the version.
+      # It NEVER modifies pubspec.yaml.
+      # ============================================================
+      - name: Read App Version
+        id: version
+        shell: bash
+        run: |
+          VERSION=$(sed -n 's/^version:[[:space:]]*//p' pubspec.yaml | head -n 1)
+
+          if [ -z "$VERSION" ]; then
+            echo "ERROR: version not found in pubspec.yaml"
+            exit 1
+          fi
+
+          echo "========================================"
+          echo "App version: $VERSION"
+          echo "========================================"
+
+          echo "version=$VERSION" >> "$GITHUB_OUTPUT"
+
+
+      # ============================================================
+      # Show environment
+      # ============================================================
+      - name: Show Build Information
+        run: |
+          echo "========================================"
+          echo "Workflow:       $GITHUB_WORKFLOW"
+          echo "Run number:     $GITHUB_RUN_NUMBER"
+          echo "Ref:             $GITHUB_REF"
+          echo "Ref name:        $GITHUB_REF_NAME"
+          echo "Ref type:        $GITHUB_REF_TYPE"
+          echo "App version:     ${{ steps.version.outputs.version }}"
+          echo "========================================"
+
+          echo
+          echo "Flutter:"
+          flutter --version
+
+          echo
+          echo "pubspec.yaml:"
+          grep '^version:' pubspec.yaml
+
+
+      # ============================================================
+      # Setup release signing
+      # ============================================================
+      - name: Setup Release Signing
+        if: env.KEYSTORE_BASE64 != ''
+        env:
+          KEY_ALIAS: ${{ secrets.KEY_ALIAS }}
+          KEY_PASSWORD: ${{ secrets.KEY_PASSWORD }}
+          STORE_PASSWORD: ${{ secrets.STORE_PASSWORD }}
+        run: |
+          echo "$KEYSTORE_BASE64" | base64 -d > android/app/upload-keystore.jks
+
+          cat > android/key.properties <<EOF
+          storePassword=$STORE_PASSWORD
+          keyPassword=$KEY_PASSWORD
+          keyAlias=$KEY_ALIAS
+          storeFile=upload-keystore.jks
+          EOF
+
+
+      # ============================================================
+      # Flutter dependencies
+      # ============================================================
+      - name: Flutter Pub Get
+        run: flutter pub get
+
+
+      # ============================================================
+      # Generate native splash
+      # ============================================================
+      - name: Generate Splash
+        run: flutter pub run flutter_native_splash:create
+
+
+      # ============================================================
+      # Analyze
+      # ============================================================
+      - name: Flutter Analyze
+        run: flutter analyze
+
+
+      # ============================================================
+      # Build APK
+      # ============================================================
+      - name: Build APK
+        run: |
+          flutter build apk \
+            --release \
+            --no-tree-shake-icons
+
+
+      # ============================================================
+      # Build AAB
+      # ============================================================
+      - name: Build App Bundle
+        run: |
+          flutter build appbundle \
+            --release \
+            --no-tree-shake-icons
+
+
+      # ============================================================
+      # Rename build files
+      #
+      # Example:
+      #
+      # NoteX-2.15.0+21500.apk
+      # NoteX-2.15.0+21500.aab
+      # ============================================================
+      - name: Rename Build Results
+        run: |
+          VERSION="${{ steps.version.outputs.version }}"
+
+          echo "Using version: $VERSION"
+
+          cp \
+            build/app/outputs/flutter-apk/app-release.apk \
+            "NoteX-${VERSION}.apk"
+
+          cp \
+            build/app/outputs/bundle/release/app-release.aab \
+            "NoteX-${VERSION}.aab"
+
+
+      # ============================================================
+      # Generate SHA256 checksums
+      #
+      # Result:
+      #
+      # NoteX-2.15.0+21500.apk.sha256
+      # NoteX-2.15.0+21500.aab.sha256
+      # ============================================================
+      - name: Generate SHA256 Checksums
+        run: |
+          VERSION="${{ steps.version.outputs.version }}"
+
+          sha256sum \
+            "NoteX-${VERSION}.apk" \
+            > "NoteX-${VERSION}.apk.sha256"
+
+          sha256sum \
+            "NoteX-${VERSION}.aab" \
+            > "NoteX-${VERSION}.aab.sha256"
+
+
+      # ============================================================
+      # Verify output files
+      # ============================================================
+      - name: Verify Build Results
+        run: |
+          VERSION="${{ steps.version.outputs.version }}"
+
+          echo "========================================"
+          echo "Build results:"
+          echo "========================================"
+
+          ls -lh \
+            "NoteX-${VERSION}.apk" \
+            "NoteX-${VERSION}.aab" \
+            "NoteX-${VERSION}.apk.sha256" \
+            "NoteX-${VERSION}.aab.sha256"
+
+          echo
+          echo "SHA256:"
+          cat "NoteX-${VERSION}.apk.sha256"
+          cat "NoteX-${VERSION}.aab.sha256"
+
+
+      # ============================================================
+      # Upload to GitHub Actions Artifact
+      #
+      # IMPORTANT:
+      # This does NOT create a GitHub Release.
+      #
+      # Files are available from:
+      #
+      # Actions
+      #   -> Build NoteX
+      #      -> selected workflow run
+      #         -> Artifacts
+      # ============================================================
+      - name: Upload Build Artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: NoteX-${{ steps.version.outputs.version }}
+          path: |
+            NoteX-${{ steps.version.outputs.version }}.apk
+            NoteX-${{ steps.version.outputs.version }}.aab
+            NoteX-${{ steps.version.outputs.version }}.apk.sha256
+            NoteX-${{ steps.version.outputs.version }}.aab.sha256
+          if-no-files-found: error
+          retention-days: 30
       # ────────────────────────────────────────────────────────────────
       # Flutter
       # ────────────────────────────────────────────────────────────────
