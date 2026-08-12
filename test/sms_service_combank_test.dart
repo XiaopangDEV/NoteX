@@ -1,6 +1,6 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:note_taking_app/services/sms_parser.dart';
-import 'package:note_taking_app/data/transaction_model.dart';
+import 'package:notex/services/sms_parser.dart';
+import 'package:notex/data/transaction_model.dart';
 import 'package:another_telephony/telephony.dart';
 
 void main() {

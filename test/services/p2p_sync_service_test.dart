@@ -1,9 +1,9 @@
 import 'dart:convert';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:note_taking_app/data/note_model.dart';
-import 'package:note_taking_app/features/sync/data/p2p_pairing_model.dart';
-import 'package:note_taking_app/services/p2p_sync_service.dart';
-import 'package:note_taking_app/services/sync_crypto_service.dart';
+import 'package:notex/data/note_model.dart';
+import 'package:notex/features/sync/data/p2p_pairing_model.dart';
+import 'package:notex/services/p2p_sync_service.dart';
+import 'package:notex/services/sync_crypto_service.dart';
 
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();

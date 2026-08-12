@@ -2,14 +2,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
-import 'package:note_taking_app/data/category_constants.dart';
-import 'package:note_taking_app/data/category_definition.dart';
-import 'package:note_taking_app/features/finances/data/transaction_repository.dart';
-import 'package:note_taking_app/data/transaction_category.dart';
-import 'package:note_taking_app/core/theme/app_layout.dart';
-import 'package:note_taking_app/utils/app_route.dart';
-import 'package:note_taking_app/widgets/frosted_glass_sliver_app_bar.dart';
-import 'package:note_taking_app/features/finances/presentation/screens/sms_rules_screen.dart';
+import 'package:notex/data/category_constants.dart';
+import 'package:notex/data/category_definition.dart';
+import 'package:notex/features/finances/data/transaction_repository.dart';
+import 'package:notex/data/transaction_category.dart';
+import 'package:notex/core/theme/app_layout.dart';
+import 'package:notex/utils/app_route.dart';
+import 'package:notex/widgets/frosted_glass_sliver_app_bar.dart';
+import 'package:notex/features/finances/presentation/screens/sms_rules_screen.dart';
 
 class CategoryManagementScreen extends StatefulWidget {
   const CategoryManagementScreen({super.key});

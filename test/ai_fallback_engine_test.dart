@@ -1,6 +1,6 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:note_taking_app/services/gemini_nano_service.dart';
-import 'package:note_taking_app/services/offline_ai_fallback_service.dart';
+import 'package:notex/services/gemini_nano_service.dart';
+import 'package:notex/services/offline_ai_fallback_service.dart';
 
 void main() {
   group('OfflineAiFallbackService Unit Tests', () {

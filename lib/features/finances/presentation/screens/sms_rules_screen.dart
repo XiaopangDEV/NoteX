@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:provider/provider.dart';
-import 'package:note_taking_app/data/settings_provider.dart';
-import 'package:note_taking_app/features/finances/data/transaction_repository.dart';
-import 'package:note_taking_app/data/transaction_category.dart';
-import 'package:note_taking_app/services/sms_service.dart';
-import 'package:note_taking_app/core/theme/app_layout.dart';
-import 'package:note_taking_app/utils/app_route.dart';
-import 'package:note_taking_app/widgets/frosted_glass_sliver_app_bar.dart';
-import 'package:note_taking_app/features/finances/presentation/screens/category_management_screen.dart';
+import 'package:notex/data/settings_provider.dart';
+import 'package:notex/features/finances/data/transaction_repository.dart';
+import 'package:notex/data/transaction_category.dart';
+import 'package:notex/services/sms_service.dart';
+import 'package:notex/core/theme/app_layout.dart';
+import 'package:notex/utils/app_route.dart';
+import 'package:notex/widgets/frosted_glass_sliver_app_bar.dart';
+import 'package:notex/features/finances/presentation/screens/category_management_screen.dart';
 
 class SmsRulesScreen extends StatefulWidget {
   const SmsRulesScreen({super.key});

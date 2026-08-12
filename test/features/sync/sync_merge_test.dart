@@ -1,7 +1,7 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:sqflite_common_ffi/sqflite_ffi.dart';
-import 'package:note_taking_app/data/database_helper.dart';
-import 'package:note_taking_app/services/sync_merge_service.dart';
+import 'package:notex/data/database_helper.dart';
+import 'package:notex/services/sync_merge_service.dart';
 
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();

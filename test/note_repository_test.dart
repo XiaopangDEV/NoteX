@@ -1,9 +1,9 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:sqflite_common_ffi/sqflite_ffi.dart';
-import 'package:note_taking_app/features/notes/data/note_repository.dart';
-import 'package:note_taking_app/data/database_helper.dart';
-import 'package:note_taking_app/data/note_model.dart';
-import 'package:note_taking_app/data/database_constants.dart';
+import 'package:notex/features/notes/data/note_repository.dart';
+import 'package:notex/data/database_helper.dart';
+import 'package:notex/data/note_model.dart';
+import 'package:notex/data/database_constants.dart';
 
 void main() {
   // Setup sqflite_common_ffi for flutter test

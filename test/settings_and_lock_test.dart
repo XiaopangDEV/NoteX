@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:note_taking_app/data/settings_provider.dart';
-import 'package:note_taking_app/screens/app_lock_screen.dart';
+import 'package:notex/data/settings_provider.dart';
+import 'package:notex/screens/app_lock_screen.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 

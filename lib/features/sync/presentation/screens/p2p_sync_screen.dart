@@ -4,17 +4,17 @@ import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import 'package:qr_flutter/qr_flutter.dart';
 import 'package:intl/intl.dart';
-import 'package:note_taking_app/core/theme/app_layout.dart';
-import 'package:note_taking_app/core/ui/app_card.dart';
-import 'package:note_taking_app/core/ui/app_bottom_sheet.dart';
-import 'package:note_taking_app/core/ui/app_chip.dart';
-import 'package:note_taking_app/core/ui/app_dialog.dart';
-import 'package:note_taking_app/core/ui/frosted_sliver_app_bar.dart';
-import 'package:note_taking_app/widgets/bouncing_widget.dart';
-import 'package:note_taking_app/providers/note_provider.dart';
-import 'package:note_taking_app/services/backup_service.dart';
-import 'package:note_taking_app/features/sync/providers/p2p_sync_provider.dart';
-import 'package:note_taking_app/features/sync/presentation/widgets/qr_scanner_dialog.dart';
+import 'package:notex/core/theme/app_layout.dart';
+import 'package:notex/core/ui/app_card.dart';
+import 'package:notex/core/ui/app_bottom_sheet.dart';
+import 'package:notex/core/ui/app_chip.dart';
+import 'package:notex/core/ui/app_dialog.dart';
+import 'package:notex/core/ui/frosted_sliver_app_bar.dart';
+import 'package:notex/widgets/bouncing_widget.dart';
+import 'package:notex/providers/note_provider.dart';
+import 'package:notex/services/backup_service.dart';
+import 'package:notex/features/sync/providers/p2p_sync_provider.dart';
+import 'package:notex/features/sync/presentation/widgets/qr_scanner_dialog.dart';
 
 class P2pSyncScreen extends StatefulWidget {
   const P2pSyncScreen({super.key});

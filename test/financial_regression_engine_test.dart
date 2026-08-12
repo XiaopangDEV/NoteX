@@ -1,5 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:note_taking_app/services/financial_regression_engine.dart';
+import 'package:notex/services/financial_regression_engine.dart';
 
 void main() {
   group('FinancialRegressionEngine Tests', () {

@@ -6,7 +6,7 @@ import 'package:animations/animations.dart';
 import '../../data/note_model.dart';
 import '../../data/settings_provider.dart';
 import '../../providers/note_provider.dart';
-import 'package:note_taking_app/features/notes/presentation/screens/note_editor_screen.dart';
+import 'package:notex/features/notes/presentation/screens/note_editor_screen.dart';
 import '../../screens/home_screen.dart'; // For NoteCard for now, maybe move it too
 import '../../features/notes/data/note_repository.dart';
 import '../../core/theme/app_layout.dart';

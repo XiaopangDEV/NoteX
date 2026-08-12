@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:note_taking_app/features/notes/data/note_repository.dart';
-import 'package:note_taking_app/data/note_model.dart';
-import 'package:note_taking_app/data/settings_provider.dart';
+import 'package:notex/features/notes/data/note_repository.dart';
+import 'package:notex/data/note_model.dart';
+import 'package:notex/data/settings_provider.dart';
 import 'package:animations/animations.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 
-import 'package:note_taking_app/screens/home_screen.dart';
-import 'package:note_taking_app/features/notes/presentation/screens/note_editor_screen.dart';
-import 'package:note_taking_app/core/theme/app_layout.dart';
-import 'package:note_taking_app/widgets/frosted_glass_sliver_app_bar.dart';
-import 'package:note_taking_app/core/ui/app_card.dart';
+import 'package:notex/screens/home_screen.dart';
+import 'package:notex/features/notes/presentation/screens/note_editor_screen.dart';
+import 'package:notex/core/theme/app_layout.dart';
+import 'package:notex/widgets/frosted_glass_sliver_app_bar.dart';
+import 'package:notex/core/ui/app_card.dart';
 
 enum FilterType { archived, trash }
 

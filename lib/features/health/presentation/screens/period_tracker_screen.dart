@@ -6,7 +6,7 @@ import '../../data/period_repository.dart';
 import '../../../../services/period_prediction_service.dart';
 import 'package:intl/intl.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
-import 'package:note_taking_app/features/settings/presentation/screens/settings_screen.dart';
+import 'package:notex/features/settings/presentation/screens/settings_screen.dart';
 import 'package:flutter/foundation.dart';
 import '../../../../services/notification_service.dart';
 import 'package:flutter/services.dart';

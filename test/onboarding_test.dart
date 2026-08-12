@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:note_taking_app/features/settings/providers/settings_provider.dart';
-import 'package:note_taking_app/features/settings/presentation/screens/onboarding_screen.dart';
+import 'package:notex/features/settings/providers/settings_provider.dart';
+import 'package:notex/features/settings/presentation/screens/onboarding_screen.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import 'package:note_taking_app/features/sync/providers/p2p_sync_provider.dart';
-import 'package:note_taking_app/features/sync/presentation/screens/p2p_sync_screen.dart';
+import 'package:notex/features/sync/providers/p2p_sync_provider.dart';
+import 'package:notex/features/sync/presentation/screens/p2p_sync_screen.dart';
 
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();

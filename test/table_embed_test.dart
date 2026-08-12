@@ -1,7 +1,7 @@
 import 'dart:convert';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:flutter_quill/quill_delta.dart';
-import 'package:note_taking_app/utils/rich_text_utils.dart';
+import 'package:notex/utils/rich_text_utils.dart';
 
 void main() {
   group('TableBlockEmbed Unit Tests', () {

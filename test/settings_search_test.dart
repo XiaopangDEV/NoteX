@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:provider/provider.dart';
-import 'package:note_taking_app/features/settings/presentation/screens/settings_screen.dart';
-import 'package:note_taking_app/data/settings_provider.dart';
-import 'package:note_taking_app/l10n/app_localizations.dart';
+import 'package:notex/features/settings/presentation/screens/settings_screen.dart';
+import 'package:notex/data/settings_provider.dart';
+import 'package:notex/l10n/app_localizations.dart';
 
 void main() {
   testWidgets('SettingsScreen search filters items correctly', (WidgetTester tester) async {

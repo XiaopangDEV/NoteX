@@ -1,5 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:note_taking_app/services/sync_crypto_service.dart';
+import 'package:notex/services/sync_crypto_service.dart';
 
 void main() {
   group('SyncCryptoService Tests', () {

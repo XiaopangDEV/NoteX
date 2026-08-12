@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:flutter_quill/flutter_quill.dart';
 import 'package:flutter_quill/quill_delta.dart';
-import 'package:note_taking_app/utils/quill_checklist_helper.dart';
+import 'package:notex/utils/quill_checklist_helper.dart';
 
 void main() {
   group('QuillChecklistHelper Tests', () {
